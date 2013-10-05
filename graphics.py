@@ -36,6 +36,24 @@ def drawFrame():
         )
 
 
+def update():
+    screen.clear()
+
+    for y in range(0, stage.inner_size[1]):
+
+        for x in range(0, stage.inner_size[0]):
+            screen.addstr(
+                stage.padding[0] + y, stage.padding[3] + x,
+                theme.get_tile('bg'),
+                theme.get_color('bg')
+                )
+
+    drawFrame()
+    drawSnake()
+
+    screen.refresh()
+
+
 def init():
     global screen
     # start the curses environment
@@ -47,3 +65,6 @@ def init():
     # hides the cursor
     curses.curs_set(0)
     curses.start_color()
+
+    # curses.keypad(stdscr, TRUE);
+    screen.nodelay(1)

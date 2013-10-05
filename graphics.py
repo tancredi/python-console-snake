@@ -56,15 +56,17 @@ def update():
 
 def init():
     global screen
-    # start the curses environment
     screen = curses.initscr()
-    # turn off echoing of typed characters
     curses.noecho()
-    # stop the terminal from waiting for newlines to read input
     curses.cbreak()
-    # hides the cursor
     curses.curs_set(0)
     curses.start_color()
-
-    # curses.keypad(stdscr, TRUE);
     screen.nodelay(1)
+
+
+def exit():
+    screen.clear()
+    screen.keypad(0)
+    curses.echo()
+    curses.nocbreak()
+    curses.endwin()

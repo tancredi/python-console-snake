@@ -4,6 +4,19 @@ import theme
 import gameloop
 
 
-graphics.init()
-theme.init()
-gameloop.start()
+def exit():
+    graphics.exit()
+    print 'Come back soon!'
+
+
+def run():
+    try:
+
+        graphics.init()
+        theme.init()
+        gameloop.start()
+
+    except KeyboardInterrupt:
+        exit()
+
+run()

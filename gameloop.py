@@ -1,7 +1,7 @@
 
 import time
 import graphics
-import gamelogic
+import game
 import config
 import controls
 
@@ -12,7 +12,7 @@ playing = False
 
 def update():
     graphics.update()
-    gamelogic.update()
+    game.update()
 
 
 def step():

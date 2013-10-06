@@ -7,3 +7,15 @@ keys = {
     'RIGHT': 0x43,
     'UP': 0x41,
 }
+
+apple_domain = 1000
+
+food_values = {
+    'apple': 3,
+}
+
+game_sizes = {
+    's': (25, 20),
+    'm': (50, 40),
+    'l': (80, 40),
+}

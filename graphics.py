@@ -1,23 +1,36 @@
 
 import stage
-import gameloop
-import gamelogic
+import game
 import theme
 import curses
 
 screen = None
 
 
-def drawTile(x, y, tile, color):
-    x += stage.padding[3] + stage.game_size[0]
-    y += stage.padding[0] + stage.game_size[1] / 2
+def drawTile(x, y, tile='', color=None):
+    color = color or theme.get_color('default')
+
+    x = x * 2 + stage.padding[3] * 2 + stage.width / 2
+    y += stage.padding[0] + stage.height / 2
 
     screen.addstr(y, x, tile, color)
-    screen.addstr(y, x + 1, tile, color)
+    if (len(tile) < 2):
+        screen.addstr(y, x + 1, tile, color)
 
+
+def drawScore():
+    score_formatted = str(game.score).zfill(2)
+    drawTile(0, -stage.height / 2, score_formatted)
+
+
+    # screen.addstr(
+    #     stage.padding[0],
+    #     stage.inner_size[0] + stage.padding[0] - len(padded_frame),
+    #     padded_frame
+    #     )
 
 def drawSnake():
-    for part in gamelogic.snake:
+    for part in game.snake:
         drawTile(
             part[0],
             part[1],
@@ -26,30 +39,26 @@ def drawSnake():
             )
 
 
-def drawFrame():
-    padded_frame = str(gameloop.frame).zfill(2)
-
-    screen.addstr(
-        stage.padding[0],
-        stage.inner_size[0] + stage.padding[0] - len(padded_frame),
-        padded_frame
-        )
+def drawApples():
+    for apple in game.apples:
+        drawTile(
+            apple[0],
+            apple[1],
+            theme.get_tile('apple'),
+            theme.get_color('apple')
+            )
 
 
 def update():
     screen.clear()
 
-    for y in range(0, stage.inner_size[1]):
+    for y in range(stage.boundaries['top'], stage.boundaries['bottom']):
+        for x in range(stage.boundaries['left'], stage.boundaries['right']):
+            drawTile(x, y, theme.get_tile('bg'), theme.get_color('bg'))
 
-        for x in range(0, stage.inner_size[0]):
-            screen.addstr(
-                stage.padding[0] + y, stage.padding[3] + x,
-                theme.get_tile('bg'),
-                theme.get_color('bg')
-                )
-
-    drawFrame()
+    drawApples()
     drawSnake()
+    drawScore()
 
     screen.refresh()
 

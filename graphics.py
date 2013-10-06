@@ -23,12 +23,6 @@ def drawScore():
     drawTile(0, -stage.height / 2, score_formatted)
 
 
-    # screen.addstr(
-    #     stage.padding[0],
-    #     stage.inner_size[0] + stage.padding[0] - len(padded_frame),
-    #     padded_frame
-    #     )
-
 def drawSnake():
     for part in game.snake:
         drawTile(

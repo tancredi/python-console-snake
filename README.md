@@ -2,7 +2,7 @@
 
 > Lightweight snake game running in the console
 
-![Screenshot](http://s8.postimg.org/lyq8uep11/snake.png)
+![Screenshot](http://s21.postimg.org/4ruxnq90n/snake_2.png)
 
 ### Usage
 
@@ -18,7 +18,7 @@ python snake
 
 ### Options
 
-Run `python snake -help` to see the options
+Run `python snake -help` for list of options
 
 ```
 Usage: snake [options]

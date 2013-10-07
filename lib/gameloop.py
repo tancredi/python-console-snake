@@ -36,7 +36,7 @@ def step():
 
         update()
         frame += 1
-        last_update = cur_time
+        last_update = time.time()
 
 
 def start():

@@ -31,6 +31,12 @@ def step():
         frame += 1
         last_update = cur_time
 
+        if not elapsed:
+            until_next = config.frame_len
+        else:
+            until_next = elapsed - config.frame_len
+            time.sleep(until_next)
+
 
 def start():
     global playing

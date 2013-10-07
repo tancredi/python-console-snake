@@ -24,18 +24,19 @@ def step():
     if last_update:
         elapsed = cur_time - last_update
     else:
-        elapsed = None
+        elapsed = 0
 
     if not elapsed or elapsed > config.frame_len:
-        update()
-        frame += 1
-        last_update = cur_time
 
         if not elapsed:
             until_next = config.frame_len
         else:
             until_next = elapsed - config.frame_len
             time.sleep(until_next)
+
+        update()
+        frame += 1
+        last_update = cur_time
 
 
 def start():

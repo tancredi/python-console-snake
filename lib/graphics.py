@@ -6,7 +6,6 @@ import curses
 
 screen = None
 
-
 def drawTile(x, y, tile='', color=None):
     color = color or theme.get_color('default')
 
@@ -31,7 +30,14 @@ def drawSnake():
             theme.get_tile('snake-body'),
             theme.get_color('snake')
             )
-
+    # Clean last tile
+    drawTile(
+            game.lastPos[0],
+            game.lastPos[1],
+            theme.get_tile('bg'),
+            theme.get_color('bg')
+            )
+    
 
 def drawApples():
     for apple in game.apples:
@@ -42,23 +48,19 @@ def drawApples():
             theme.get_color('apple')
             )
 
-
-def update():
-    screen.clear()
-
+def drawGame():
     for y in range(stage.boundaries['top'], stage.boundaries['bottom']):
         for x in range(stage.boundaries['left'], stage.boundaries['right']):
             drawTile(x, y, theme.get_tile('bg'), theme.get_color('bg'))
 
-    drawApples()
+def update():
+
     drawSnake()
-    drawScore()
-
-    screen.refresh()
-
+    drawApples()
 
 def init():
     global screen
+
     screen = curses.initscr()
     curses.noecho()
     curses.cbreak()

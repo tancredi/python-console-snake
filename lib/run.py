@@ -2,7 +2,6 @@
 import graphics
 import theme
 import gameloop
-import game
 import parser
 import stage
 
@@ -18,7 +17,6 @@ def run():
         stage.init()
         graphics.init()
         theme.init()
-        game.reset()
         gameloop.start()
 
     except KeyboardInterrupt:

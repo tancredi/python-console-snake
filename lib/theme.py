@@ -1,5 +1,6 @@
 
 import curses
+import stage
 
 colors_map = {}
 theme = None
@@ -9,30 +10,17 @@ default_color = None
 def init():
     global theme, colors_map, default_color
 
-    theme = {
-        "colors": {
-            "default": (curses.COLOR_WHITE, curses.COLOR_BLACK),
-            "bg": (curses.COLOR_WHITE, curses.COLOR_WHITE),
-            "snake": (curses.COLOR_GREEN, curses.COLOR_GREEN),
-            "apple": (curses.COLOR_RED, curses.COLOR_RED),
-        },
-        "tiles": {
-            "bg": ' ',
-            "snake-body": ' ',
-            "apple": ' ',
-        }
-    }
-
+    theme = stage.chosen_theme
     colors_map = get_colors_map()
     default_color = theme['colors']['default']
 
 
 def get_color(key):
-    return curses.color_pair(colors_map[key])
+    return curses.color_pair(colors_map.get(key, 0))
 
 
 def get_tile(key):
-    return theme['tiles'].get(key, '?')
+    return theme['tiles'].get(key, ' ')
 
 
 def get_colors_map():

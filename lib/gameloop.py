@@ -5,20 +5,18 @@ import game
 import config
 import controls
 
-frame = 0
 last_update = None
 playing = False
 
 
 def update():
-    graphics.update()
     game.update()
+    graphics.update()
 
 
 def step():
-    global last_update, frame
+    global last_update
 
-    controls.update()
     cur_time = time.time()
 
     if last_update:
@@ -35,7 +33,6 @@ def step():
             time.sleep(until_next)
 
         update()
-        frame += 1
         last_update = time.time()
 
 
@@ -44,7 +41,9 @@ def start():
 
     playing = True
 
+    reset()
     while playing:
+        controls.update()
         step()
 
 
@@ -52,3 +51,9 @@ def stop():
     global playing, frame, last_update
 
     playing = False
+
+
+def reset():
+
+    game.reset()
+    graphics.drawGame()

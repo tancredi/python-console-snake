@@ -6,16 +6,18 @@ import random
 import config
 
 direction = (0, 0)
+lastPos = (0, 0)
 snake = []
 speed = 1
 apples = []
-grow = 0
+grow = config.initial_size - 1
 score = 0
 
 
 def update():
     moveSnake()
     checkCatch()
+    checkPositionAllowed()
 
 
 def checkCatch():
@@ -37,18 +39,14 @@ def eatApple(i):
 
 
 def moveSnake():
-    global grow
+    global grow, lastPos
 
     last_unchanged = None
-
+    lastPos = (snake[len(snake)-1][0], snake[len(snake)-1][1])
     for i, part in enumerate(snake):
         if i == 0:
             x = part[0] + speed * direction[0]
             y = part[1] + speed * direction[1]
-
-            if not positionAllowed(x, y):
-                reset()
-                return
         else:
             x = last_unchanged[0]
             y = last_unchanged[1]
@@ -59,7 +57,6 @@ def moveSnake():
     if grow:
         snake.append(last_unchanged)
         grow -= 1
-        print snake
 
 
 def getGameArea():
@@ -70,13 +67,14 @@ def getGameArea():
 
 
 def reset():
-    global direction, snake, apples_count, apples, score
+    global direction, snake, apples_count, apples, score, grow
 
     direction = (1, 0)
     snake = [(0, 0)]
     gameloop.frame = 1
     apples_count = 1
     apples = []
+    grow = config.initial_size - 1
     score = 0
 
     apples_count += int(math.floor(getGameArea() / config.apple_domain))
@@ -89,7 +87,6 @@ def spawnApple():
     if len(apples) >= getGameArea():
         return
 
-    print stage.boundaries
     x = random.randrange(stage.boundaries['left'], stage.boundaries['right'])
     y = random.randrange(stage.boundaries['top'], stage.boundaries['bottom'])
 
@@ -119,13 +116,15 @@ def isOutOfBoundaries(x, y):
     return False
 
 
-def positionAllowed(x, y):
+def checkPositionAllowed():
     collides_with_body = False
+    x = snake[0][0]
+    y = snake[0][1]
 
-    if len(snake) > 1:
-        for i in range(1, len(snake) - 1):
-            if x == snake[i][0] and y == snake[i][1]:
-                collides_with_body = True
-                break
+    for i in range(1, len(snake) - 1):
+        if x == snake[i][0] and y == snake[i][1]:
+            collides_with_body = True
+            break
 
-    return not (collides_with_body or isOutOfBoundaries(x, y))
+    if (collides_with_body or isOutOfBoundaries(x, y)):
+        gameloop.reset()

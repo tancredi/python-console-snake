@@ -8,9 +8,11 @@ import controls
 last_update = None
 playing = False
 
+
 def update():
     game.update()
     graphics.update()
+
 
 def step():
     global last_update
@@ -50,7 +52,8 @@ def stop():
 
     playing = False
 
+
 def reset():
-    
+
     game.reset()
     graphics.drawGame()

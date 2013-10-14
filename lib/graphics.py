@@ -6,6 +6,7 @@ import curses
 
 screen = None
 
+
 def drawTile(x, y, tile='', color=None):
     color = color or theme.get_color('default')
 
@@ -32,11 +33,11 @@ def drawSnake():
             )
     # Clean last tile
     drawTile(
-            game.lastPos[0],
-            game.lastPos[1],
-            theme.get_tile('bg'),
-            theme.get_color('bg')
-            )
+        game.lastPos[0],
+        game.lastPos[1],
+        theme.get_tile('bg'),
+        theme.get_color('bg')
+        )
     
 
 def drawApples():
@@ -48,15 +49,34 @@ def drawApples():
             theme.get_color('apple')
             )
 
+
 def drawGame():
     for y in range(stage.boundaries['top'], stage.boundaries['bottom']):
         for x in range(stage.boundaries['left'], stage.boundaries['right']):
             drawTile(x, y, theme.get_tile('bg'), theme.get_color('bg'))
+    drawBorders()
+
+
+def drawBorders():
+    for y in range(stage.boundaries['top'], stage.boundaries['bottom']):
+        drawTile(stage.boundaries['left'] - 1, y, theme.get_tile('border-v'), theme.get_color('border'))
+        drawTile(stage.boundaries['right'], y, theme.get_tile('border-v'), theme.get_color('border'))
+
+    for x in range(stage.boundaries['left'], stage.boundaries['right']):
+        drawTile(x, stage.boundaries['top'] - 1, theme.get_tile('border-h'), theme.get_color('border'))
+        drawTile(x, stage.boundaries['bottom'], theme.get_tile('border-h'), theme.get_color('border'))
+            
+    drawTile(stage.boundaries['left'] - 1, stage.boundaries['top'] - 1, theme.get_tile('border-c'), theme.get_color('border'))
+    drawTile(stage.boundaries['left'] - 1, stage.boundaries['bottom'], theme.get_tile('border-c'), theme.get_color('border'))
+    drawTile(stage.boundaries['right'], stage.boundaries['top'] - 1, theme.get_tile('border-c'), theme.get_color('border'))
+    drawTile(stage.boundaries['right'], stage.boundaries['bottom'], theme.get_tile('border-c'), theme.get_color('border'))
+
 
 def update():
 
     drawSnake()
     drawApples()
+
 
 def init():
     global screen

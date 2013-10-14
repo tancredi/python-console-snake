@@ -21,3 +21,5 @@ game_sizes = {
     'm': (50, 40),
     'l': (80, 40),
 }
+
+initial_size = 4

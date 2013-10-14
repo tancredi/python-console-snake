@@ -10,7 +10,7 @@ lastPos = (0, 0)
 snake = []
 speed = 1
 apples = []
-grow = 0
+grow = config.initial_size - 1
 score = 0
 
 
@@ -18,6 +18,7 @@ def update():
     moveSnake()
     checkCatch()
     checkPositionAllowed()
+
 
 def checkCatch():
     if not len(snake) or not len(apples):
@@ -66,13 +67,14 @@ def getGameArea():
 
 
 def reset():
-    global direction, snake, apples_count, apples, score
+    global direction, snake, apples_count, apples, score, grow
 
     direction = (1, 0)
     snake = [(0, 0)]
     gameloop.frame = 1
     apples_count = 1
     apples = []
+    grow = config.initial_size - 1
     score = 0
 
     apples_count += int(math.floor(getGameArea() / config.apple_domain))
@@ -112,6 +114,7 @@ def isOutOfBoundaries(x, y):
         return True
 
     return False
+
 
 def checkPositionAllowed():
     collides_with_body = False

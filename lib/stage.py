@@ -3,10 +3,11 @@ import console
 import math
 import config
 import parser
+import themes
 
 
 def init():
-    global size, width, height, padding, boundaries
+    global size, width, height, padding, boundaries, chosen_theme
 
     available_size = (width, height) = console.getTerminalSize()
 
@@ -39,3 +40,6 @@ def init():
         "right": int(math.floor(width / 2)),
         "top": int(math.floor(-height / 2)),
     }
+
+    chosen_theme = themes.game_themes[parser.options.theme]
+    

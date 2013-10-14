@@ -4,7 +4,6 @@ from lib import graphics, theme, gameloop, game, parser, stage
 
 def exit():
     graphics.exit()
-    print 'Come back soon!'
 
 
 def run():

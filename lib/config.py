@@ -6,6 +6,8 @@ keys = {
     'LEFT': 0x44,
     'RIGHT': 0x43,
     'UP': 0x41,
+    'Q': 0x71,
+    'ESC': 0x1b,
 }
 
 apple_domain = 1000
@@ -19,3 +21,5 @@ game_sizes = {
     'm': (50, 40),
     'l': (80, 40),
 }
+
+initial_size = 4

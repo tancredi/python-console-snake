@@ -1,5 +1,10 @@
 
-from lib import graphics, theme, gameloop, game, parser, stage
+import graphics
+import theme
+import gameloop
+import game
+import parser
+import stage
 
 
 def exit():

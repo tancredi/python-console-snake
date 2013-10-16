@@ -27,4 +27,6 @@ Options:
   -h, --help            show this help message and exit
   -s SIZE, --size=SIZE  Game size (s | m | l)
   -f, --fullscreen      Play fullscreen
+  -t THEME, --theme=THEME
+                        Game theme (classic | minimal | jungle | custom)
 ```

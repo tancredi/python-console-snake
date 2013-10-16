@@ -10,9 +10,6 @@ def update():
     key = graphics.screen.getch()
 
     if key > 0:
-        with open("test.txt", "a") as myfile:
-            myfile.write(str(key) + "  ")
-
         if key == keys['DOWN']:
             if game.direction[1] == -1:
                 return

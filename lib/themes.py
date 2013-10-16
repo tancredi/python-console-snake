@@ -18,8 +18,8 @@ game_themes = {
             "bg": (curses.COLOR_WHITE, curses.COLOR_WHITE),
             "snake": (curses.COLOR_RED, curses.COLOR_GREEN),
             "apple": (curses.COLOR_RED, curses.COLOR_RED),
-            "border": (curses.COLOR_BLACK, curses.COLOR_YELLOW),
-            "lives": (curses.COLOR_RED, curses.COLOR_GREEN),
+            "border": (curses.COLOR_WHITE, curses.COLOR_YELLOW),
+            "lives": (curses.COLOR_RED, curses.COLOR_RED),
         },
         "tiles": {
         }

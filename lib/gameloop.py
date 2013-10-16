@@ -7,6 +7,7 @@ import controls
 
 last_update = None
 playing = False
+state = 0
 
 
 def update():
@@ -37,14 +38,17 @@ def step():
 
 
 def start():
-    global playing
+    global playing, state
 
     playing = True
 
-    reset()
+    init()
     while playing:
         controls.update()
-        step()
+        if state == 0:
+            step()
+        elif state == 1:
+            graphics.drawGameOver()
 
 
 def stop():
@@ -53,7 +57,14 @@ def stop():
     playing = False
 
 
-def reset():
+def init():
+    global state
 
+    game.init()
+    graphics.drawGame()
+    state = 0
+
+
+def reset():
     game.reset()
     graphics.drawGame()

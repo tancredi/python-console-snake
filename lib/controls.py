@@ -2,6 +2,7 @@
 import __main__
 import graphics
 import game
+import gameloop
 from config import keys
 
 
@@ -9,6 +10,9 @@ def update():
     key = graphics.screen.getch()
 
     if key > 0:
+        with open("test.txt", "a") as myfile:
+            myfile.write(str(key) + "  ")
+
         if key == keys['DOWN']:
             if game.direction[1] == -1:
                 return
@@ -36,3 +40,6 @@ def update():
         elif key == keys['Q']:
             __main__.exit()
             exit()
+
+        elif gameloop.state == 1 and key == keys['ENTER']:
+            gameloop.init()

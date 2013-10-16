@@ -7,7 +7,7 @@ keys = {
     'RIGHT': 0x43,
     'UP': 0x41,
     'Q': 0x71,
-    'ESC': 0x1b,
+    'ENTER': 0x0a,
 }
 
 apple_domain = 1000

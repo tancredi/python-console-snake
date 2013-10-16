@@ -15,9 +15,10 @@ game_themes = {
         "colors": {
             "default": (curses.COLOR_WHITE, curses.COLOR_BLACK),
             "bg": (curses.COLOR_WHITE, curses.COLOR_WHITE),
-            "snake": (curses.COLOR_GREEN, curses.COLOR_GREEN),
+            "snake": (curses.COLOR_RED, curses.COLOR_GREEN),
             "apple": (curses.COLOR_RED, curses.COLOR_RED),
-            "border": (curses.COLOR_YELLOW, curses.COLOR_YELLOW),
+            "border": (curses.COLOR_BLACK, curses.COLOR_YELLOW),
+            "lives": (curses.COLOR_RED, curses.COLOR_GREEN),
         },
         "tiles": {
         }
@@ -29,6 +30,7 @@ game_themes = {
             "snake": (curses.COLOR_WHITE, curses.COLOR_BLACK),
             "apple": (curses.COLOR_WHITE, curses.COLOR_BLACK),
             "border": (curses.COLOR_WHITE, curses.COLOR_BLACK),
+            "lives": (curses.COLOR_WHITE, curses.COLOR_BLACK),
         },
         "tiles": {
             "snake-body": '[]',
@@ -36,6 +38,7 @@ game_themes = {
             "border-h": '-',
             "border-v": ' |',
             "border-c": ' +',
+            "lives": '{}'
         }
     },
     'jungle': {
@@ -44,12 +47,14 @@ game_themes = {
             "bg": (curses.COLOR_GREEN, curses.COLOR_BLACK),
             "snake": (curses.COLOR_WHITE, curses.COLOR_RED),
             "apple": (curses.COLOR_CYAN, curses.COLOR_BLACK),
-            "border": (curses.COLOR_GREEN, curses.COLOR_GREEN),
+            "border": (curses.COLOR_BLACK, curses.COLOR_GREEN),
+            "lives": (curses.COLOR_BLACK, curses.COLOR_GREEN),
         },
         "tiles": {
             "bg": '~',
             "snake-body": ' ',
             "apple": '@-',
+            "lives": 'O '
         }
     },
 }

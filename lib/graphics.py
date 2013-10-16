@@ -18,9 +18,23 @@ def drawTile(x, y, tile='', color=None):
         screen.addstr(y, x + 1, tile, color)
 
 
+def drawGameOver():
+    drawTile(-4, -1, " GAME OVER ", theme.get_color('border'))
+    drawTile(-7, 1, " Press ENTER to restart ", theme.get_color('border'))
+
+
 def drawScore():
     score_formatted = str(game.score).zfill(2)
-    drawTile(0, -stage.height / 2, score_formatted)
+    drawTile((stage.width / 2) - 1, (-stage.height / 2) - 1, score_formatted, theme.get_color('border'))
+
+
+def drawLives():
+    posx = (-stage.width / 2) + 3
+    for x in xrange(1, game.lives + 1):
+        posx += 1
+        drawTile(posx, (-stage.height / 2) - 1, theme.get_tile('lives'), theme.get_color('lives'))
+        posx += 1
+        drawTile(posx, (-stage.height / 2) - 1, theme.get_tile('border-h'), theme.get_color('border'))
 
 
 def drawSnake():
@@ -55,6 +69,7 @@ def drawGame():
         for x in range(stage.boundaries['left'], stage.boundaries['right']):
             drawTile(x, y, theme.get_tile('bg'), theme.get_color('bg'))
     drawBorders()
+    drawText()
 
 
 def drawBorders():
@@ -72,10 +87,18 @@ def drawBorders():
     drawTile(stage.boundaries['right'], stage.boundaries['bottom'], theme.get_tile('border-c'), theme.get_color('border'))
 
 
+def drawText():
+    drawTile((stage.width / 2) - 4, (-stage.height / 2) - 1, "score:", theme.get_color('border'))
+    drawTile((-stage.width / 2), (-stage.height / 2) - 1, "lives:", theme.get_color('border'))
+    drawTile(-5, (stage.height / 2), " Press Q to quit ", theme.get_color('border'))
+
+
 def update():
 
     drawSnake()
     drawApples()
+    drawScore()
+    drawLives()
 
 
 def init():

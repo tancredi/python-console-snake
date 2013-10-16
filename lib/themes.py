@@ -11,6 +11,7 @@ import curses
 #COLOR_WHITE
 
 game_themes = {
+
     'classic': {
         "colors": {
             "default": (curses.COLOR_WHITE, curses.COLOR_BLACK),
@@ -23,6 +24,7 @@ game_themes = {
         "tiles": {
         }
     },
+
     'minimal': {
         "colors": {
             "default": (curses.COLOR_WHITE, curses.COLOR_BLACK),
@@ -41,6 +43,7 @@ game_themes = {
             "lives": '{}'
         }
     },
+
     'jungle': {
         "colors": {
             "default": (curses.COLOR_WHITE, curses.COLOR_BLACK),
@@ -57,4 +60,5 @@ game_themes = {
             "lives": 'O '
         }
     },
+
 }

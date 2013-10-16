@@ -42,4 +42,3 @@ def init():
     }
 
     chosen_theme = themes.game_themes[parser.options.theme]
-    

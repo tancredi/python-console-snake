@@ -61,4 +61,21 @@ game_themes = {
         }
     },
 
+    '80s': {
+        "colors": {
+            "default": (curses.COLOR_WHITE, curses.COLOR_BLACK),
+            "bg": (curses.COLOR_YELLOW, curses.COLOR_BLACK),
+            "snake": (curses.COLOR_WHITE, curses.COLOR_BLUE),
+            "apple": (curses.COLOR_CYAN, curses.COLOR_YELLOW),
+            "border": (curses.COLOR_BLACK, curses.COLOR_CYAN),
+            "lives": (curses.COLOR_BLACK, curses.COLOR_BLUE),
+        },
+        "tiles": {
+            "bg": '. ',
+            "snake-body": ' ',
+            "apple": ' ',
+            "lives": ' '
+        }
+    },
+
 }

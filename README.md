@@ -41,7 +41,7 @@ The default theme is `classic`. Other available themes are the following:
 
 #### `80s`
 
-![Jungle theme screenshot](http://s10.postimg.org/j4vlfic9k/snake_80s.jpg)
+![80s theme screenshot](http://s10.postimg.org/j4vlfic9k/snake_80s.jpg)
 
 ### Contribute
 

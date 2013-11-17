@@ -46,3 +46,7 @@ The default theme is `classic`. Other available themes are the following:
 ### Contribute
 
 Add your theme to `snake/themes.py`, pull requests are welcome!
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/tancredi/python-console-snake/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+

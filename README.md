@@ -39,10 +39,10 @@ The default theme is `classic`. Other available themes are the following:
 
 ![Jungle theme screenshot](http://s9.postimg.org/f37kp89lr/snake_jungle.png)
 
-#### `80s`
-
-![80s theme screenshot](http://s23.postimg.org/k27e601uy/snake80s.jpg)
-
 ### Contribute
 
 Add your theme to `snake/themes.py`, pull requests are welcome!
+
+### Licence
+
+Copyright (c) 2014 Tancredi Trugenberger. - Released under the MIT license

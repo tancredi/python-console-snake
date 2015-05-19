@@ -8,7 +8,7 @@ import stage
 
 def exit():
     graphics.exit()
-    print 'Come back soon!'
+    print('Come back soon!')
 
 
 def run():

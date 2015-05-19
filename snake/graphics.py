@@ -13,9 +13,9 @@ def drawTile(x, y, tile='', color=None):
     x = x * 2 + stage.padding[3] * 2 + stage.width / 2
     y += stage.padding[0] + stage.height / 2
 
-    screen.addstr(y, x, tile, color)
+    screen.addstr(int(y), int(x), tile, color)
     if (len(tile) < 2):
-        screen.addstr(y, x + 1, tile, color)
+        screen.addstr(int(y), int(x) + 1, tile, color)
 
 
 def drawGameOver():
@@ -35,7 +35,7 @@ def drawScore():
 
 def drawLives():
     posx = (-stage.width / 2) + 3
-    for x in xrange(1, game.lives + 1):
+    for x in range(1, game.lives + 1):
         posx += 1
         drawTile(
             posx,

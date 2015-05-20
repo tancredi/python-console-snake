@@ -10,31 +10,31 @@ def update():
     key = graphics.screen.getch()
 
     if key > 0:
-        if key == keys['DOWN']:
+        if key in keys['DOWN']:
             if game.direction[1] == -1:
                 return
 
             game.direction = (0, 1)
 
-        elif key == keys['LEFT']:
+        elif key in keys['LEFT']:
             if game.direction[0] == 1:
                 return
 
             game.direction = (-1, 0)
 
-        elif key == keys['RIGHT']:
+        elif key in keys['RIGHT']:
             if game.direction[0] == -1:
                 return
 
             game.direction = (1, 0)
 
-        elif key == keys['UP']:
+        elif key in keys['UP']:
             if game.direction[1] == 1:
                 return
 
             game.direction = (0, -1)
 
-        elif key == keys['Q']:
+        elif key in keys['Q']:
             __main__.exit()
             exit()
 

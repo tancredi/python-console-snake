@@ -1,81 +1,175 @@
-
-import subprocess
-import os
-
-running = True
-state = 0
+import turtle
+import random
 
 
-def printHeader():
-    os.system('clear')
-    print 'S N A K E\n'
+head = [0]
 
-def tutorial():
-    global state
+#score
+a = [0]
+b = [0]
 
-    if state == 0:
-        printHeader()
-        print '\nHi there! Welcome to Snake.'
-        print 'Type snake to launch the game'
-        success = False
-        while not success:
-            command = raw_input()
-            if command == 'snake':
-                print '\nUse the keys to move and Q to quit'
-                subprocess.call("sleep 1", shell=True)
-                print '3...'
-                subprocess.call("sleep 1", shell=True)
-                print '2...'
-                subprocess.call("sleep 1", shell=True)
-                print '1...'
-                subprocess.call("sleep 1", shell=True)
-                subprocess.call("python __main__.py", shell=True)
-                success = True
-                state += 1
-            else:
-                print 'Type snake to launch the game'
+#food coord
+foodcoord = [0,0,0]
 
-    elif state == 1:
-        printHeader()
-        print 'Great game. Now let\'s see what options are available.'
-        print 'Type snake --help'
-        success = False
-        while not success:
-            command = raw_input()
-            if command == 'snake --help' or command == 'snake -h':
-                subprocess.call("python . --help", shell=True)
-                subprocess.call("sleep 1", shell=True)
-                success = True
-                state += 1
-            else:
-                print 'Type snake --help'
+#cposition
+cpos = []
 
-    elif state == 2:
-        print '\n\nYou can try different themes for the game'
-        print 'For example, type snake --theme minimal'
-        print 'Or type snake --help to get a list of available themes and then snake --theme "name"'
-        success = False
-        while not success:
-            command = raw_input()
-            cmdArray = command.split(' ')
-            if len(cmdArray) == 3 and \
-                cmdArray[0] == 'snake --theme' and \
-                cmdArray[1] == '--theme' or cmdArray[1] == '--t' and \
-                cmdArray[2] == 'classic' or cmdArray[2] == 'minimal':
-                command = "python . --theme " + cmdArray[2]
-                subprocess.call(command, shell=True)
-                success = True
-                state += 1
-            elif command == 'snake --help' or command == 'snake -h':
-                success = False
-            else:
-                print 'Try typying snake --theme minimal'
 
-def run():
-    try:
-        while running:
-            tutorial()
-    except KeyboardInterrupt:
-        exit()
+def home(x,y):
+    x = 0
+    y = 0
+    a[0] = 0
+    b[0] = 0
+    head[0] = 0
+    foodcoord[2] = 0
+    cpos[:] = []
+    turtle.hideturtle()
+    turtle.clear()
+    turtle.pu()
+    turtle.color("red")
+    turtle.goto(0,0)
+    turtle.write("Play")
+    turtle.title("My Snake Game")
+    turtle.onscreenclick(start)
+    turtle.mainloop()
 
-run()
+def window():
+    turtle.clear()
+    turtle.pu()
+    turtle.speed(0)
+    turtle.pensize(20)
+    turtle.color("black")
+    turtle.goto(-220,220)
+    turtle.pd()
+    turtle.goto(220,220)
+    turtle.goto(220,-220)
+    turtle.goto(-220,-220)
+    turtle.goto(-220,220)
+    turtle.pu()
+    turtle.goto(0,0)
+
+def start(x,y):
+    turtle.onscreenclick(None)
+
+    window()
+
+    tfood = turtle.Turtle()
+    tfood.hideturtle()
+    tfood.pu()
+    tfood.speed(0)
+    tfood.shape("square")
+    tfood.color("red")
+
+    tscore = turtle.Turtle()
+    tscore.hideturtle()
+    tscore.pu()
+    tscore.speed(0)
+    tscore.goto(100,-250)
+    tscore.write("Score:" + str(a[0]), align="center",font=(10))
+    
+    while x > -210 and x < 210 and y > -210 and y <210:
+        if foodcoord[2] == 0:
+            food(tfood)
+            foodcoord[2] = 1
+        turtle.onkey(u,"Up")
+        turtle.onkey(l,"Left")
+        turtle.onkey(r,"Right")
+        turtle.onkey(d,"Down")
+        turtle.listen()
+        move()
+        x = turtle.xcor()
+        y = turtle.ycor()        
+        if x > foodcoord[0]*20-5 and x < foodcoord[0]*20+5 and y > foodcoord[1]*20-5 and y < foodcoord[1]*20+5:
+            foodcoord[2] = 0
+            tfood.clear()
+            a[0] += 1
+            tscore.clear()
+            tscore.write("Score:" + str(a[0]), align="center",font=(10))
+        
+        if len(cpos) > 1:
+            for i in range(1,len(cpos)):
+                if x < cpos[i][0]+5 and x > cpos[i][0]-5 and y < cpos[i][1]+5 and y > cpos[i][1]-5:
+                        tscore.clear()
+                        tfood.clear()
+                        gameover()
+    tscore.clear()
+    tfood.clear()
+    gameover()
+
+
+#Food
+def food(tfood):
+    x = random.randrange(-8,8,1)
+    y = random.randrange(-8,8,1)
+    foodcoord[0] = x
+    foodcoord[1] = y
+    tfood.hideturtle()
+    tfood.pu()
+    tfood.shape("square")
+    tfood.color("blue")
+    tfood.goto(x*20,y*20)
+    tfood.stamp()
+
+#Up   
+def u():
+    if head[0] == 270:
+        pass
+    else:
+        head[0] = 90
+#Down
+def d():
+    if head[0] == 90:
+        pass
+    else:
+        head[0] = 270
+#Left
+def l():
+    if head[0] == 0:
+        pass
+    else:
+        head[0] = 180
+#Right
+def r():
+    if head[0] == 180:
+        pass
+    else:
+        head[0] = 0
+
+def move():
+    turtle.pensize(1)
+    turtle.color("green")
+    turtle.pu()
+    turtle.speed(3)
+    turtle.setheading(head[0])
+    turtle.shape("square")
+    turtle.stamp()
+    turtle.fd(20)
+    x = turtle.xcor()
+    y = turtle.ycor()
+    if b[0] > a[0]:     
+        turtle.clearstamps(1)
+        cpos.insert(0,[round(x),round(y)])
+        cpos.pop(-1)
+    else:
+        cpos.insert(0,[round(x),round(y)])       
+        b[0] += 1    
+    
+def gameover():
+    turtle.onscreenclick(None)
+    turtle.speed(0)
+    turtle.pu()
+    turtle.goto(0,150)
+    turtle.color("red")
+    turtle.write("Sorry, game over",align="center", font=(15))
+    turtle.goto(0,50)
+    turtle.write("Your Score:" + str(a[0]),align="center",font=(10))
+    turtle.goto(200,-200)
+    turtle.write("Click to return",align="right",font=(0.0000001))
+    turtle.onscreenclick(home)
+    turtle.mainloop()
+    
+        
+
+
+if __name__ == '__main__':
+    home(0,0)

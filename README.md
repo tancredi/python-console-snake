@@ -2,6 +2,8 @@
 
 > Lightweight, configurable snake game running in the console
 
+[![Run on Repl.it](https://repl.it/badge/github/tancredi/python-console-snake)](https://repl.it/github/tancredi/python-console-snake)
+
 ![Screenshot](http://s2.postimg.org/tzpt8rs09/snake.png)
 
 ### Usage

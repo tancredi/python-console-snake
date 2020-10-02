@@ -1,4 +1,4 @@
-# python-console-snake
+# python-console-snake - An Amazing Game
 
 > Lightweight, configurable snake game running in the console
 

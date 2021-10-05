@@ -41,7 +41,7 @@ The default theme is `classic`. Other available themes are the following:
 
 ### Contribute
 
-Add your theme to `snake/themes.py`, pull requests are welcome!
+Add your theme to `snake/themes.py`, pull requests are welcome
 
 ### Licence
 

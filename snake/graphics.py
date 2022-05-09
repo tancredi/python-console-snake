@@ -34,7 +34,7 @@ def draw_score():
 
 def draw_lives():
     posx = (-stage.width / 2) + 3
-    for x in xrange(1, game.lives + 1):
+    for x in range(1, game.lives + 1):
         posx += 1
         draw_tile(
             posx,

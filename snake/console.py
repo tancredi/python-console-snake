@@ -13,8 +13,8 @@ def get_terminal_size():
                 'hh',
                 fcntl.ioctl(fd, termios.TIOCGWINSZ, '1234')
             )
-        except:
-            return
+        except Exception as e:
+            return e
         return cr
 
     cr = ioctl_gwinsz(0) or ioctl_gwinsz(1) or ioctl_gwinsz(2)
@@ -23,7 +23,9 @@ def get_terminal_size():
             fd = os.open(os.ctermid(), os.O_RDONLY)
             cr = ioctl_gwinsz(fd)
             os.close(fd)
-        except:
+        except Exception as e:
+            error = e.message
+            print(error)
             pass
     if not cr:
         cr = (env.get('LINES', 25), env.get('COLUMNS', 80))

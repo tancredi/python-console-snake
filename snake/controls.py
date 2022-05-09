@@ -1,4 +1,3 @@
-
 import __main__
 import graphics
 import game

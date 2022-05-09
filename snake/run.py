@@ -1,4 +1,3 @@
-
 import graphics
 import theme
 import gameloop
@@ -8,7 +7,7 @@ import stage
 
 def exit():
     graphics.exit()
-    print 'Come back soon!'
+    print('Come back soon!')
 
 
 def run():
@@ -21,5 +20,6 @@ def run():
 
     except KeyboardInterrupt:
         exit()
+
 
 run()

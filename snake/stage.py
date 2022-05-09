@@ -9,7 +9,7 @@ import themes
 def init():
     global size, width, height, padding, boundaries, chosen_theme
 
-    available_size = (width, height) = console.getTerminalSize()
+    available_size = (width, height) = console.get_terminal_size()
 
     chosen_size = config.game_sizes[parser.options.size]
 

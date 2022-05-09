@@ -1,4 +1,3 @@
-
 import stage
 import game
 import theme
@@ -7,87 +6,87 @@ import curses
 screen = None
 
 
-def drawTile(x, y, tile='', color=None):
+def draw_tile(x, y, tile='', color=None):
     color = color or theme.get_color('default')
 
     x = x * 2 + stage.padding[3] * 2 + stage.width / 2
     y += stage.padding[0] + stage.height / 2
 
     screen.addstr(y, x, tile, color)
-    if (len(tile) < 2):
+    if len(tile) < 2:
         screen.addstr(y, x + 1, tile, color)
 
 
-def drawGameOver():
-    drawTile(-4, -1, " GAME OVER ", theme.get_color('border'))
-    drawTile(-7, 1, " Press ENTER to restart ", theme.get_color('border'))
+def draw_game_over():
+    draw_tile(-4, -1, " GAME OVER ", theme.get_color('border'))
+    draw_tile(-7, 1, " Press ENTER to restart ", theme.get_color('border'))
 
 
-def drawScore():
+def draw_score():
     score_formatted = str(game.score).zfill(2)
-    drawTile(
+    draw_tile(
         (stage.width / 2) - 1,
         (-stage.height / 2) - 1,
         score_formatted,
         theme.get_color('border')
-        )
+    )
 
 
-def drawLives():
+def draw_lives():
     posx = (-stage.width / 2) + 3
     for x in xrange(1, game.lives + 1):
         posx += 1
-        drawTile(
+        draw_tile(
             posx,
             (-stage.height / 2) - 1,
             theme.get_tile('lives'),
             theme.get_color('lives')
-            )
+        )
         posx += 1
-        drawTile(
+        draw_tile(
             posx,
             (-stage.height / 2) - 1,
             theme.get_tile('border-h'),
             theme.get_color('border')
-            )
+        )
 
 
-def drawSnake():
+def draw_snake():
     for part in game.snake:
-        drawTile(
+        draw_tile(
             part[0],
             part[1],
             theme.get_tile('snake-body'),
             theme.get_color('snake')
-            )
+        )
     # Clean last tile
-    drawTile(
+    draw_tile(
         game.lastPos[0],
         game.lastPos[1],
         theme.get_tile('bg'),
         theme.get_color('bg')
-        )
+    )
 
 
-def drawApples():
+def draw_apples():
     for apple in game.apples:
-        drawTile(
+        draw_tile(
             apple[0],
             apple[1],
             theme.get_tile('apple'),
             theme.get_color('apple')
-            )
+        )
 
 
-def drawGame():
+def draw_game():
     for y in range(stage.boundaries['top'], stage.boundaries['bottom']):
         for x in range(stage.boundaries['left'], stage.boundaries['right']):
-            drawTile(x, y, theme.get_tile('bg'), theme.get_color('bg'))
-    drawBorders()
-    drawText()
+            draw_tile(x, y, theme.get_tile('bg'), theme.get_color('bg'))
+    draw_borders()
+    draw_text()
 
 
-def drawBorders():
+def draw_borders():
     tile_v = theme.get_tile('border-v')
     tile_h = theme.get_tile('border-h')
     tile_c = theme.get_tile('border-c')
@@ -100,32 +99,31 @@ def drawBorders():
     y_bottom = stage.boundaries['bottom']
 
     for y in range(y_top, y_bottom):
-        drawTile(x_left - 1, y, tile_v, color)
-        drawTile(x_right, y, tile_v, color)
+        draw_tile(x_left - 1, y, tile_v, color)
+        draw_tile(x_right, y, tile_v, color)
 
     for x in range(x_left, x_right):
-        drawTile(x, y_top - 1, tile_h, color)
-        drawTile(x, y_bottom, tile_h, color)
+        draw_tile(x, y_top - 1, tile_h, color)
+        draw_tile(x, y_bottom, tile_h, color)
 
-    drawTile(x_left - 1, y_top - 1, tile_c, color)
-    drawTile(x_left - 1, y_bottom, tile_c, color)
-    drawTile(x_right, y_top - 1, tile_c, color)
-    drawTile(x_right, y_bottom, tile_c, color)
+    draw_tile(x_left - 1, y_top - 1, tile_c, color)
+    draw_tile(x_left - 1, y_bottom, tile_c, color)
+    draw_tile(x_right, y_top - 1, tile_c, color)
+    draw_tile(x_right, y_bottom, tile_c, color)
 
 
-def drawText():
+def draw_text():
     color = theme.get_color('border')
-    drawTile((stage.width / 2) - 4, (-stage.height / 2) - 1, "score:", color)
-    drawTile((-stage.width / 2), (-stage.height / 2) - 1, "lives:", color)
-    drawTile(-5, (stage.height / 2), " Press Q to quit ", color)
+    draw_tile((stage.width / 2) - 4, (-stage.height / 2) - 1, "score:", color)
+    draw_tile((-stage.width / 2), (-stage.height / 2) - 1, "lives:", color)
+    draw_tile(-5, (stage.height / 2), " Press Q to quit ", color)
 
 
 def update():
-
-    drawSnake()
-    drawApples()
-    drawScore()
-    drawLives()
+    draw_snake()
+    draw_apples()
+    draw_score()
+    draw_lives()
 
 
 def init():

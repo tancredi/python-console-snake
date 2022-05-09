@@ -1,4 +1,3 @@
-
 import stage
 import gameloop
 import math
@@ -24,34 +23,34 @@ def init():
 
 
 def update():
-    moveSnake()
-    checkCatch()
-    checkPositionAllowed()
+    move_snake()
+    check_catch()
+    check_position_allowed()
 
 
-def checkCatch():
+def check_catch():
     if not len(snake) or not len(apples):
         return
 
     for i, apple in enumerate(apples):
         if (snake[0][0]) == apple[0] and (snake[0][1]) == apple[1]:
-            eatApple(i)
+            eat_apple(i)
 
 
-def eatApple(i):
+def eat_apple(i):
     global grow, score
 
     apples.pop(i)
-    spawnApple()
+    spawn_apple()
     grow += config.food_values['apple']
     score += 1
 
 
-def moveSnake():
+def move_snake():
     global grow, lastPos
 
     last_unchanged = None
-    lastPos = (snake[len(snake)-1][0], snake[len(snake)-1][1])
+    lastPos = (snake[len(snake) - 1][0], snake[len(snake) - 1][1])
     for i, part in enumerate(snake):
         if i == 0:
             x = part[0] + speed * direction[0]
@@ -68,7 +67,7 @@ def moveSnake():
         grow -= 1
 
 
-def getGameArea():
+def get_game_area():
     w = math.fabs(stage.boundaries['right'] - stage.boundaries['left'])
     h = math.fabs(stage.boundaries['top'] - stage.boundaries['bottom'])
 
@@ -85,14 +84,14 @@ def reset():
     apples = []
     grow = config.initial_size - 1
 
-    apples_count += int(math.floor(getGameArea() / config.apple_domain))
+    apples_count += int(math.floor(get_game_area() / config.apple_domain))
 
     for i in range(0, apples_count):
-        spawnApple()
+        spawn_apple()
 
 
-def spawnApple():
-    if len(apples) >= getGameArea():
+def spawn_apple():
+    if len(apples) >= get_game_area():
         return
 
     x = random.randrange(stage.boundaries['left'], stage.boundaries['right'])
@@ -108,13 +107,13 @@ def spawnApple():
         if part[0] == x and part[1] == y:
             position_free = False
 
-    if position_free and not isOutOfBoundaries(x, y):
+    if position_free and not is_out_of_boundaries(x, y):
         apples.append((x, y))
     else:
-        spawnApple()
+        spawn_apple()
 
 
-def isOutOfBoundaries(x, y):
+def is_out_of_boundaries(x, y):
     if x < stage.boundaries['left'] or x > stage.boundaries['right'] - 1:
         return True
 
@@ -124,7 +123,7 @@ def isOutOfBoundaries(x, y):
     return False
 
 
-def checkPositionAllowed():
+def check_position_allowed():
     global lives
 
     collides_with_body = False
@@ -136,7 +135,7 @@ def checkPositionAllowed():
             collides_with_body = True
             break
 
-    if (collides_with_body or isOutOfBoundaries(x, y)):
+    if collides_with_body or is_out_of_boundaries(x, y):
         gameloop.reset()
         lives -= 1
         if lives == 0:

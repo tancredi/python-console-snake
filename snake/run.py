@@ -1,4 +1,3 @@
-
 import graphics
 import theme
 import gameloop
@@ -21,5 +20,6 @@ def run():
 
     except KeyboardInterrupt:
         exit()
+
 
 run()

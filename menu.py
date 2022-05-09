@@ -1,4 +1,3 @@
-
 import subprocess
 import os
 
@@ -6,15 +5,16 @@ running = True
 state = 0
 
 
-def printHeader():
+def print_header():
     os.system('clear')
     print 'S N A K E\n'
+
 
 def tutorial():
     global state
 
     if state == 0:
-        printHeader()
+        print_header()
         print '\nHi there! Welcome to Snake.'
         print 'Type snake to launch the game'
         success = False
@@ -36,7 +36,7 @@ def tutorial():
                 print 'Type snake to launch the game'
 
     elif state == 1:
-        printHeader()
+        print_header()
         print 'Great game. Now let\'s see what options are available.'
         print 'Type snake --help'
         success = False
@@ -57,19 +57,20 @@ def tutorial():
         success = False
         while not success:
             command = raw_input()
-            cmdArray = command.split(' ')
-            if len(cmdArray) == 3 and \
-                cmdArray[0] == 'snake --theme' and \
-                cmdArray[1] == '--theme' or cmdArray[1] == '--t' and \
-                cmdArray[2] == 'classic' or cmdArray[2] == 'minimal':
-                command = "python . --theme " + cmdArray[2]
+            cmd_array = command.split(' ')
+            if len(cmd_array) == 3 and \
+                    cmd_array[0] == 'snake --theme' and \
+                    cmd_array[1] == '--theme' or cmd_array[1] == '--t' and \
+                    cmd_array[2] == 'classic' or cmd_array[2] == 'minimal':
+                command = "python . --theme " + cmd_array[2]
                 subprocess.call(command, shell=True)
                 success = True
                 state += 1
             elif command == 'snake --help' or command == 'snake -h':
                 success = False
             else:
-                print 'Try typying snake --theme minimal'
+                print 'Try typing snake --theme minimal'
+
 
 def run():
     try:
@@ -77,5 +78,6 @@ def run():
             tutorial()
     except KeyboardInterrupt:
         exit()
+
 
 run()
